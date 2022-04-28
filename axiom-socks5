@@ -58,4 +58,4 @@ proxychains curl ifconfig.me
 # Other way to test
 echo "Other way to test"
 echo 
-echo "curl --proxy socks5://bugbounty:MeuPasswordSinistro@198.211.108.252:1080 https://ifconfig.me"
+echo "curl --proxy socks5://bugbounty:MeuPasswordSinistro@IP:1080 https://ifconfig.me"
