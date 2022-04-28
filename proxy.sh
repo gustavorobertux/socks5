@@ -6,11 +6,11 @@ apt install proxychains
 
 # Faz um backup do arquivo do proxychains
 
-cp /etc/proxychains.conf /etc/proxychains.conf.original
+cp /etc/proxychains.conf /etc/proxychains.conf.orig
 
 # Certifica-se de ter um arquivo limpo do proxychains
 
-cp /etc/proxychains.conf.original /etc/proxychains.conf
+rm /etc/proxychains.conf && cp /etc/proxychains.conf.orig /etc/proxychains.conf
 
 # Coloca o proxychains em quiet_mode
 
