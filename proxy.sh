@@ -4,13 +4,21 @@
 
 apt install proxychains
 
-# Faz um backup do arquivo do proxychains
+# Remove o arquivo do proxychains
 
-cp /etc/proxychains.conf /etc/proxychains.conf.orig
+rm /etc/proxychains.conf 
 
-# Certifica-se de ter um arquivo limpo do proxychains
+# Entra no diretorio /etc
 
-rm /etc/proxychains.conf && cp /etc/proxychains.conf.orig /etc/proxychains.conf
+cd /etc
+
+# Faz o download de um arquivo limpo do proxychains
+
+wget https://raw.githubusercontent.com/gustavorobertux/socks5/main/proxychains.conf
+
+# Sai do diretorio etc 
+
+cd ~
 
 # Coloca o proxychains em quiet_mode
 
