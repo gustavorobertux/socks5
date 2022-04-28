@@ -26,3 +26,23 @@ curl --proxy socks5://bugbounty:MeuPasswordSinistro@IP_DO_SEU_SERVIDOR_NA_DIGITA
 ```
 
 Alterem como quiser, isso são apenas idéias!
+
+# axiom-socks5
+
+Se você precisa definir o numero de proxys que você deseja utilizar, baixe a ferramenta axiom-socks5 para o diretório
+
+```
+/root/.axiom/interact/
+```
+
+Você pode fazer dessa forma:
+```
+wget https://raw.githubusercontent.com/gustavorobertux/socks5/main/axiom-socks5 -O /root/.axiom/interact/
+```
+
+Para utilizar basta proceder da seguinte forma:
+
+```
+axiom-socks5 N
+```
+Onde N é o número de socks5 que você vai precisar.
