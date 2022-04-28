@@ -1,0 +1,58 @@
+#!/bin/bash
+
+if [ "$1" == "" ] ; then
+            echo "Usage: `basename $0` [-h]"
+                exit 0
+fi
+
+# Instances
+
+instances=$1
+
+AXIOM_PATH="$HOME/.axiom"
+source "$AXIOM_PATH/interact/includes/vars.sh"
+source "$AXIOM_PATH/interact/includes/functions.sh"
+
+single_mode="false"
+
+# Install proxychains on axiom machine
+
+apt install proxychains
+
+# Remove original proxychains.conf
+
+rm /etc/proxychains.conf
+
+# cd /etc
+cd /etc
+
+# wget proxychains
+wget https://raw.githubusercontent.com/gustavorobertux/socks5/main/proxychains.conf
+
+# Set proxychains to quiet_mode
+
+sed -i 's/#quiet_mode/quiet_mode/g' /etc/proxychains.conf
+
+# Comment line 64
+
+sed -i '64s/^/#/' /etc/proxychains.conf
+
+# Create proxy machines, name: proxyXX
+
+axiom-fleet proxy -i $1
+
+# Start socks5 proxy using special docker image
+
+axiom-exec -f "proxy\*" 'docker run -d -p 1080:1080 gustavorobertux/proxy'
+
+# Add new proxies to /etc/proxychains.conf
+
+axiom-exec -f "proxy\*" 'hostname -I | cut -f1 -d" "' 2>&1 | sed 's/^/socks5 /g;s/$/ 1080 bugbounty MeuPasswordSinistro/g' >> /etc/proxychains.conf
+
+# Test without proxychains
+
+curl ifconfig.me
+
+# Test using proxychains
+
+proxychains curl ifconfig.me
